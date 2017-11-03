@@ -30,7 +30,8 @@ bot.onText(/.+/, message => {
     }
   }else if(msg.includes("@tcleungbot")){
     //push to apiai
-    var request = apiai.textRequest(msg, {
+    const mentionMsg = msg.replace("@tcleungbot","")
+    var request = apiai.textRequest(mentionMsg, {
         sessionId: chatId
     });
 

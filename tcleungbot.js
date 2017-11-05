@@ -73,7 +73,10 @@ bot.onText(/.+/, message => {
   }
   }else if(msg.includes("@tcleungbot")){
     //push to apiai
-    const mentionMsg = msg.replace("@tcleungbot","")
+    const mentionMsg = msg.replace("@tcleungbot","").trim()
+    if(!mentionMsg.trim()){
+      return ";";
+    }
     var request = apiai.textRequest(mentionMsg, {
         sessionId: chatId
     });
@@ -81,9 +84,23 @@ bot.onText(/.+/, message => {
     request.on('response', function(response) {
       console.log(response);
       const outputMsg = response.result.fulfillment.speech;
-      if(outputMsg){
-        bot.sendMessage(chatId, outputMsg);
+      const action = response.result.action;
+      if(action == 'callaqicn'){
+    var callaqicn = require('./callaqicn.js');
+    var pushLocale = "";
+    if(response.result.parameters.hklocation){
+      pushLocale = response.result.parameters.hklocation
+    }else if(response.result.parameters.geocity){
+      pushLocale = response.result.parameters.geocity
+    }else if(response.result.parameters.geocounty){
+      pushLocale = response.result.parameters.geocounty
+    }else{
+      pushLocale = "沙田";
+    }
+    callaqicn.getAqiByCity(pushLocale,chatId,bot);
 
+      }else if(outputMsg){
+          bot.sendMessage(chatId, outputMsg);
       }
     });
     request.end();
@@ -165,4 +182,8 @@ function getAqhi(chatId,bot){
     //bot.sendMessage(chatId,"\n===========停止輸出===========");
   });
   //return "|Error|";
+}
+
+function callAqi(){
+
 }

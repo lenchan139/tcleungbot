@@ -64,10 +64,12 @@ bot.onText(/.+/, message => {
       bot.sendMessage(chatId, weatherMsg);
     });
 
-  }else if("空氣"){
+  }else if(msg.includes("空氣")){
     //bot.sendMessage(chatId,getAqhi());
     getAqhi(chatId,bot);
     //console.log("\n\n\n!+" + getAqhi());
+  }else{
+
   }
   }else if(msg.includes("@tcleungbot")){
     //push to apiai

@@ -10,6 +10,10 @@
   "license": "GPL-3.0",
   "dependencies": {
     "apiai": "^4.0.3",
+    "dateformat": "^3.0.2",
+    "decode-html": "^2.0.0",
+    "feedparser": "^2.2.3",
+    "forecast": "^0.3.2",
     "node-telegram-bot-api": "^0.29.0"
   }
 }

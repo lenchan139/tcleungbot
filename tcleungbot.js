@@ -99,7 +99,15 @@ bot.onText(/.+/, message => {
     }
     callaqicn.getAqiByCity(pushLocale,chatId,bot);
 
-      }else if(outputMsg){
+  }else if(action=="speakhknews"){
+    var speakhknews = require('./speakhknews.js')
+    speakhknews.getNews('hknews',chatId,bot)
+  }else if(action=="speakhkEntNews"){
+    console.log("gogogo")
+    var speakhknews = require('./speakhknews.js')
+    speakhknews.getNews('entertainment',chatId,bot)
+    console.log("googo")
+  }else if(outputMsg){
           bot.sendMessage(chatId, outputMsg);
       }
     });

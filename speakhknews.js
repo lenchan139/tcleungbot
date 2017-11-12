@@ -4,19 +4,21 @@ const aqicn_token = env_config.aqicn_token();
 const gmap_token = env_config.gmap_token();
 exports.getNews = function (newsType, chatId,bot) {  var FeedParser = require('feedparser');
   var request = require('request'); // for fetching the feed
-  var req = request('https://news.google.com/news/rss/local?hl=zh-HK&gl=HK&ned=hk')
+  var req = ""
   console.log(newsType)
   if(newsType == 'entertainment'){
     //娛樂版
       console.log(newsType)
     req = request('https://news.google.com/news/rss/headlines/section/topic/ENTERTAINMENT.zh-TW_hk/%E5%A8%9B%E6%A8%82?ned=hk&hl=zh-HK&gl=HK')
-    console.req;
+
   }else{
-    req = request('https://news.google.com/news/rss/local?hl=zh-HK&gl=HK&ned=hk')
+    console.log(newsType)
+    req = request('https://news.google.com/news/rss/headlines/section/topic/NATION.zh-TW_hk/%E9%A6%99%E6%B8%AF?ned=hk&hl=zh-HK&gl=HK')
+
   }
   var feedparser = new FeedParser([]);
   //bot.sendMessage(chatId,"地區：空氣污染指數：程度 - 日期\n");
-  var string_return = "即時港聞：\n"
+  var string_return = "即時新聞：\n"
   req.on('error', function (error) {
     // handle any request errors
   });

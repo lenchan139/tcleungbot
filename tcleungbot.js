@@ -105,6 +105,9 @@ bot.onText(/.+/, message => {
   }else if(action=="speakhkEntNews"){
     var speakhknews = require('./speakhknews.js')
     speakhknews.getNews('entertainment',chatId,bot)
+  }else if(action=="checkBitcoin"){
+    var btc = require('./checkBitcoin.js')
+    btc.checkBitcoin(chatId,bot)
   }else if(outputMsg){
           bot.sendMessage(chatId, outputMsg);
       }

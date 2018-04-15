@@ -42,7 +42,7 @@ bot.onText(/.+/, message => {
         bot.sendMessage(chatId, "我要建國啊/_\\");
         break;
     default:
-        bot.sendMessage(chatId, "系統：未定義指令。")
+        //bot.sendMessage(chatId, "系統：未定義指令。")
     }
   }else if(msg.includes("大少")){
     if(msg.includes("天氣")){

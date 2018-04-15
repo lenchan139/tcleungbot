@@ -86,18 +86,18 @@ bot.onText(/.+/, message => {
       const outputMsg = response.result.fulfillment.speech;
       const action = response.result.action;
       if(action == 'callaqicn'){
-    var callaqicn = require('./callaqicn.js');
-    var pushLocale = "";
-    if(response.result.parameters.hklocation){
-      pushLocale = response.result.parameters.hklocation
-    }else if(response.result.parameters.geocity){
-      pushLocale = response.result.parameters.geocity
-    }else if(response.result.parameters.geocounty){
-      pushLocale = response.result.parameters.geocounty
-    }else{
-      pushLocale = "沙田";
-    }
-    callaqicn.getAqiByCity(pushLocale,chatId,bot);
+      var callaqicn = require('./callaqicn.js');
+      var pushLocale = "";
+      if(response.result.parameters.hklocation){
+        pushLocale = response.result.parameters.hklocation
+      }else if(response.result.parameters.geocity){
+        pushLocale = response.result.parameters.geocity
+      }else if(response.result.parameters.geocounty){
+        pushLocale = response.result.parameters.geocounty
+      }else{
+        pushLocale = "沙田";
+      }
+      callaqicn.getAqiByCity(pushLocale,chatId,bot);
 
   }else if(action=="speakhknews"){
     var speakhknews = require('./speakhknews.js')
@@ -108,10 +108,25 @@ bot.onText(/.+/, message => {
   }else if(action=="checkBitcoin"){
     var btc = require('./checkBitcoin.js')
     btc.checkBitcoin(chatId,bot)
+  }else if(action=="calculateFomula"){
+    var mathjs = require('mathjs')
+    try{
+      var ans = mathjs.eval(response.result.parameters.any)
+    }catch(e){
+      bot.sendMessage(chatId, "讀唔明 " +
+                        response.result.parameters.any +
+                        " 啊！打啱條算式好難咩？x_x" )
+    }
+    if(ans){
+      bot.sendMessage(chatId, "算式 " +
+                        response.result.parameters.any +
+                        "嘅答案係 " + ans + " ")
+    }
   }else if(outputMsg){
           bot.sendMessage(chatId, outputMsg);
-      }
-    });
+
+  }
+  });
     request.end();
   }
   //bot.sendMessage(chatId, 'you: '+ message.text + '| tcl: 咩事+_+');

@@ -16,6 +16,7 @@
     "feedparser": "^2.2.3",
     "forecast": "^0.3.2",
     "json-parser": "^1.1.5",
+    "mathjs": "^4.1.1",
     "node-telegram-bot-api": "^0.29.0"
   }
 }
